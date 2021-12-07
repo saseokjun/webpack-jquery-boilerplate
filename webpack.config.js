@@ -44,6 +44,7 @@ if(!isDevMode){
 
 module.exports = {
   mode: isDevMode ? 'development': 'production',
+  target: 'web',
   entry,
   output: {
     path: path.join(__dirname, '/dist'),
@@ -54,22 +55,22 @@ module.exports = {
     rules: [
       {
         test: /\.js$/i,
-        exclude: /node_modules/,
         use: 'babel-loader',
+        exclude: ['/node_modules'],
       },
       {
         test: /\.ts$/i,
-        exclude: /node_modules/,
         use: 'ts-loader',
+        exclude: ['/node_modules'],
       },
       {
         test: /\.css$/i,
-        exclude: /node_modules/,
         use: [
           isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader, 
           'css-modules-typescript-loader',
           'css-loader'
         ],
+        exclude: ['/node_modules'],
       },
       {
         test: /\.html$/i,
